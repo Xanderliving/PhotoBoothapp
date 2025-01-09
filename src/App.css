@@ -1,0 +1,10 @@
+.photo-strip {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 20px;
+}
+.photo-strip img {
+  border: 2px solid black;
+  border-radius: 5px;
+}
