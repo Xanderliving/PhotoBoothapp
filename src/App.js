@@ -1,5 +1,6 @@
 import Webcam from "react-webcam";
 import { useCallback, useRef, useState } from "react";
+import "./App.css";
 
 const App = () => {
   const webcamRef = useRef(null);
@@ -212,67 +213,48 @@ return (
   <div className="container">
     {imgSrcArray.length === maxPhotos ? (
       <>
-        <div className="container">
-          {imgSrcArray.length === maxPhotos ? (
-            <>
-              <canvas ref={canvasRef} style={{ display: 'none' }}></canvas>
-              <div className="photo-strip" style={{ display: 'flex', overflowX: 'auto', width: '100%', marginBottom: '20px' }}>
-                {imgSrcArray.map((imgSrc, index) => (
-                  <img key={index} src={imgSrc} alt={`captured ${index}`} style={{ width: '150px', height: 'auto', margin: '0 5px' }} />
-                ))}
-              </div>
-              <div className="btn-container" style={{ textAlign: 'center' }}>
-                <h1>Photos Captured!</h1>
-                <button onClick={retakePhotos} style={{ padding: '10px 20px', fontSize: '16px', backgroundColor: '#007bff', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
-                  Take Another Photo
-                </button>
-                <button onClick={sendEmail} style={{ padding: '10px 20px', fontSize: '16px', backgroundColor: '#28a745', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer', marginLeft: '20px' }}>
-                  Send Photo via Email
-                </button>
-              </div>
-              <div className="container">
-                {/* Display Captured Photos and Buttons */}
-                {imgSrcArray.length === maxPhotos ? (
-                  <>
-                    <div className="photo-strip">
-                      {imgSrcArray.map((imgSrc, index) => (
-                        <img key={index} src={imgSrc} alt={`captured ${index}`} style={{ width: '150px', height: 'auto', margin: '0 5px' }} />
-                      ))}
-                    </div>
-                    <div className="btn-container">
-                      <h1>Photos Captured!</h1>
-                      <button onClick={retakePhotos}>Take Another Photo</button>
+         <div className="container" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", height: "100vh", padding: "20px" }}>
+      {/* Left Side - Email Input */}
+      <div className="email-section" style={{ width: "40%", textAlign: "center" }}>
+        <h3>Enter Your Email to Receive the Photo Strip:</h3>
+        <input
+          type="email"
+          value={email}
+          onChange={handleEmailChange}
+          placeholder="Your Email"
+          style={{ width: "80%", padding: "10px", marginBottom: "10px" }}
+        />
+        <button
+          onClick={sendEmail}
+          style={{ padding: "10px 20px", fontSize: "16px", backgroundColor: "#28a745", color: "#fff", border: "none", borderRadius: "5px", cursor: "pointer" }}
+        >
+          Submit
+        </button>
 
-                      {/* Email Form */}
-                      {!emailSubmitted ? (
-                        <div>
-                          <h3>Enter Your Email to Receive the Photo Strip:</h3>
-                          <input
-                            type="email"
-                            value={email}
-                            onChange={handleEmailChange}
-                            placeholder="Your Email"
-                          />
-                          <button onClick={sendEmail}>Submit</button>
-                        </div>
-                      ) : (
-                        <p>Email sent successfully!</p>
-                      )}
-                    </div>
-                  </>
-                ) : (
-                  <div>
-                    <canvas ref={canvasRef} style={{ display: 'none' }}></canvas> {/* Hidden canvas */}
-                  </div>
-                )}
-              </div>
-            </>
-          ) : (
-            <div style={{ position: 'relative', height: '100vh', width: '100%' }}>
-              {/* Webcam and capture functionality as before */}
-            </div>
-          )}
+        {emailSubmitted && <p>Email sent successfully!</p>}
+
+        <hr style={{ margin: "20px 0" }} />
+        <p>OR</p>
+
+        <button
+          onClick={retakePhotos}
+          style={{ padding: "10px 20px", fontSize: "16px", backgroundColor: "#dc3545", color: "#fff", border: "none", borderRadius: "5px", cursor: "pointer" }}
+        >
+          Retake Photos
+        </button>
+      </div>
+
+      {/* Right Side - Photo Strip Display */}
+      <div className="photo-strip-container" style={{ width: "50%", position: "relative", textAlign: "center" }}>
+        <img src="/Frankie_Photostrip.png" alt="Photostrip Template" style={{ width: "50%", maxWidth: "200px" }} />
+        
+        <div className="photo-overlay" style={{ position: "absolute", top: "10%", left: "50%", transform: "translateX(-50%)", width: "80%", display: "flex", flexDirection: "column", alignItems: "center" }}>
+          {imgSrcArray.map((imgSrc, index) => (
+            <img key={index} src={imgSrc} alt={`captured ${index}`} style={{ width: "50%", marginBottom: "5px" }} />
+          ))}
         </div>
+      </div>
+    </div>
       </>
 
 

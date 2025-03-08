@@ -8,3 +8,37 @@
   border: 2px solid black;
   border-radius: 5px;
 }
+
+.photo-overlay {
+  position: absolute;
+  width: 80%;
+  height: 100%;
+  top: 0px; /* Align with photostrip */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.photo-overlay img:nth-child(1) {
+  position: absolute;
+  top: -33px; /* Adjust this for first photo */
+  left: 50%;
+  transform: translateX(-50%);
+  height: 22.5%;
+  width: 22.5%;
+}
+
+.photo-overlay img:nth-child(2) {
+  position: absolute;
+  top: 45%; /* Adjust this for second photo */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+}
+
+.photo-overlay img:nth-child(3) {
+  position: absolute;
+  top: 75%; /* Adjust this for third photo */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+}
